@@ -51,12 +51,12 @@ id    <- "73557" # folder under nhanes_raw/<cycle>/
 # To change different active cut-point, edit:
 cut_pt <- 10
 
-#For mini.r:
-N_demo <- 24 #Can be changed to 48
+# For mini.r: #
+N_demo <- 24 #Can be changed to 48 to change time window
 
 # Outputs #
 
-As explained earlier, Outputs (saved inside each <ID>_raw folder). A message in the console will also explain where they can be found (along with outputting the calculated fragmentation index for the participant)
+Outputs saved inside each <ID>_raw folder. A message in the console will also explain where they can be found (along with outputting the calculated fragmentation index for the participant)
 
 - counts_<ID>.csv: 
     One row per minute. 
