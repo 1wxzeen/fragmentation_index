@@ -50,7 +50,6 @@ parallel::stopCluster(cl)
 
 cnt60   <- as.data.table(cnt_out)
 
-
 tm <- grep("^(Time|Epoch)$", names(cnt60), ignore.case=TRUE, value=TRUE)[1]
 setnames(cnt60, tm, "Time")
 vm <- grep("^(VM|vm|Vector\\.Magnitude)$", names(cnt60),
@@ -77,12 +76,12 @@ out_qc     <- file.path(hour_dir, paste0("qc_", id, ".png"))
 fwrite(cnt60, out_counts)
 writeLines(as.character(FI), out_fi)
 
-png(out_qc, width=1200, height=400, res=150)
-ggplot(cnt60, aes(Time, as.numeric(Active))) +
+out_plot <- ggplot(cnt60, aes(Time, as.numeric(Active))) +
   geom_step() +
   labs(title=paste("QC", id),
        y="Active 1/0", x="Minute")
-dev.off()
+
+ggsave(out_qc, out_plot, width = 10, height = 6, dpi = 300)
 
 cat("Written to", hour_dir, "\n",
     basename(out_counts), "\n",
