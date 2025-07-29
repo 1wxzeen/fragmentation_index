@@ -33,7 +33,21 @@ setnames(raw, "HEADER_TIMESTAMP", "time")
 raw[, time := as.POSIXct(time, tz="UTC")]
 
 
-cnt_out <- agcounts::calculate_counts(as.data.frame(raw), epoch=60)
+rawdf <- as.data.frame(raw)
+dates <- unique(as.Date(rawdf$time))
+
+cores <- parallel::detectCores()
+Ncores <- cores - 1
+cl <- parallel::makeCluster(Ncores)
+doParallel::registerDoParallel(cl)
+`%dopar%` <- foreach::`%dopar%`
+
+cnt_out <- foreach::foreach(i = dates, .packages = "agcounts", .combine = dplyr::bind_rows) %dopar% {
+  agcounts::calculate_counts(rawdf[as.Date(rawdf$time) == i, ], epoch=60, verbose = TRUE)
+}
+
+parallel::stopCluster(cl)
+
 cnt60   <- as.data.table(cnt_out)
 
 
