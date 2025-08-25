@@ -7,6 +7,7 @@ It is memory safe by processin one hour at a time, handles messy timestamps, for
 ## Quickstart guide
 
 **Example CLI wiht arctools_fi/ as pwd**
+```
 #Hour to minute
 Rscript scripts/01_minutes_from_hours.R \
   --indir raw/73557_raw \
@@ -24,8 +25,9 @@ Rscript scripts/02_arctools_FI.R \
   --min_wear_hours 10 \
   --nonwear_minutes 90 \
   --nonwear_tolerance 2
+```
 
-In the arctools_fi/ as the pwd
+**(In the arctools_fi/ as the pwd)**
 
 0. One time installs
 install.packages(c("data.table","lubridate","ggplot2","activityCounts","arctools"))
@@ -37,14 +39,17 @@ dir.create(file.path("raw", paste0(id, "_raw")), recursive = TRUE, showWarnings 
 
 2. Convert hour to min (Axis1 + VM) in UTC time
 Console: 
+```
 rscript <- Sys.which("Rscript"); if (rscript == "") rscript <- file.path(R.home("bin"), "Rscript")
 system2(rscript, c("scripts/01_minutes_from_hours.R",
                    "--indir",   file.path("raw", paste0(id, "_raw")),
                    "--outdir",  "derived",
                    "--tz_local","America/Chicago"),   # your study timezone (for plots/valid-day)
         stdout = "", stderr = "")
+```
 
 3. Combine the per-hour files into a single, minite by minute table, organized by time, with gaps left (just creating a continuous timeline with missing minutes filled)
+```
 system2(rscript, c("scripts/02_arctools_FI.R",
                    "--deriveddir","derived",
                    "--outdir","out",
@@ -56,6 +61,7 @@ system2(rscript, c("scripts/02_arctools_FI.R",
                    "--nonwear_minutes","60",        # Non-wear rule (strict): flag any stretch of ≥60 consecutive minutes of zero counts as a non-wear; can change to 90 to match Choi et al. 
                    "--nonwear_tolerance","2"),      # allows for tiny blips inside non-wear runs
         stdout = "", stderr = "")
+```
 
 4. Outputs (located in root/acrtools_fi/out/)
 list.files("out", full.names = TRUE)
@@ -121,14 +127,14 @@ Timestamps can be like NHANES format (2000-01-04-16-30-00-000), ISO (T...Z), or 
     - Shows total minutes, non-wear minutes, gaps, minutes used, and number of valid days.
 
 ### Key CLI arguments
-`
+```
 --**nonwear_minutes** (60 or 90; minimum zero-run length to call a non-wear on segment of time)
 --**nonwear_tolerance** (2; allowed non-zero "blips" inside a non-wear, units: minutes)
 --**min_wear_hours** (10; wear threshold for a valid day, units: hours),
 --**active_cut_axis1** (10; Axis1 cutpoint, units: counts/min)
 --**active_cut_vm** (1500; VM cutpoint, units: counts/min)
 --**tz_local** (ex: America/Chicago; local time zone for plots and valid day)
-`
+```
 
 ## Outputs
 
