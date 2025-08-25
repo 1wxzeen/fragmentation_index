@@ -1,0 +1,2 @@
+id,tz_local,valid_days,minutes_used,nonwear_minutes,nonwear_tolerance,active_cut_vm,active_cut_axis1,astp_vm,satp_vm,A_vm,T_vm,mean_active_bout_vm,mean_sedentary_bout_vm,astp_axis1,satp_axis1,A_axis1,T_axis1,mean_active_bout_axis1,mean_sedentary_bout_axis1,astp_arctools_vm
+73557,America/Chicago,3,2168,60,2,1500,10,0.129491525423729,0.275613275613276,1475,191,7.68229166666667,3.6282722513089,0.0369978858350951,0.253623188405797,1892,70,26.6478873239437,3.94285714285714,
