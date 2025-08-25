@@ -140,11 +140,11 @@ Timestamps can be like NHANES format (2000-01-04-16-30-00-000), ISO (T...Z), or 
 
 1. out/counts_<ID>.csv
 Minute-level table (strict grid):
-- **Epoch_utc** (POSIXct UTC)
-- **Epoch_local** (POSIXct in --tz_local)
-- **VM**, Axis1 (counts/min)
-- **wear** (TRUE if not non-wear and Axis1 present)
-- **valid_day** (TRUE if the local date has ≥ --min_wear_hours wear)
+- Epoch_utc (POSIXct UTC)
+- Epoch_local (POSIXct in --tz_local)
+- VM, Axis1 (counts/min)
+- wear (TRUE if not non-wear and Axis1 present)
+- valid_day (TRUE if the local date has ≥ --min_wear_hours wear)
 No duplicates minutes and gaps are rows with NA values for counts
 
 2. out/fi_summary_<ID>.csv
