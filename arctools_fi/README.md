@@ -128,12 +128,12 @@ Timestamps can be like NHANES format (2000-01-04-16-30-00-000), ISO (T...Z), or 
 
 ### Key CLI arguments
 ```
---**nonwear_minutes** (60 or 90; minimum zero-run length to call a non-wear on segment of time)
---**nonwear_tolerance** (2; allowed non-zero "blips" inside a non-wear, units: minutes)
---**min_wear_hours** (10; wear threshold for a valid day, units: hours),
---**active_cut_axis1** (10; Axis1 cutpoint, units: counts/min)
---**active_cut_vm** (1500; VM cutpoint, units: counts/min)
---**tz_local** (ex: America/Chicago; local time zone for plots and valid day)
+--nonwear_minutes (60 or 90; minimum zero-run length to call a non-wear on segment of time)
+--nonwear_tolerance (2; allowed non-zero "blips" inside a non-wear, units: minutes)
+--min_wear_hours (10; wear threshold for a valid day, units: hours),
+--active_cut_axis1 (10; Axis1 cutpoint, units: counts/min)
+--active_cut_vm (1500; VM cutpoint, units: counts/min)
+--tz_local (ex: America/Chicago; local time zone for plots and valid day)
 ```
 
 ## Outputs
